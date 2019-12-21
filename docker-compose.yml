@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  postgres:
+    build: ./docker/postgres/
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=user_name
+      - POSTGRES_PASSWORD=passwd
+      - POSTGRES_DB=example_db
+    volumes:
+      - ./docker/postgres/data:/var/lib/postgresql/data
+  app:
+    volumes:
+      - .:/opt/django_container
+    build:
+      context: .
+      dockerfile: ./docker/app/Dockerfile
+    restart: always
+    ports:
+      - "8000:8000"
+    links:
+      - postgres
+    depends_on:
+      - postgres
