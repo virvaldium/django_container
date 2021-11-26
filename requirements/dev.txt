@@ -1,4 +1,4 @@
-Django==3.1.12
+Django==3.1.13
 djangorestframework==3.11.2
 django_configurations==2.2
 django_dotenv==1.4.2
